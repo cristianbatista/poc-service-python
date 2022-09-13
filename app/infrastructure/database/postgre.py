@@ -1,11 +1,14 @@
 from ddtrace import Pin, patch
 from loguru import logger
+from sqlalchemy import create_engine
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.schema import CreateSchema
+
 from app.config.settings import settings
-from sqlalchemy import create_engine
+
+# from sqlalchemy.schema import CreateSchema
+
 
 # patch before importing `create_engine`
 patch(sqlalchemy=True)
@@ -21,7 +24,9 @@ try:
     # Use a PIN to specify metadata related to this engine
     Pin.override(engine, service=settings.PROJECT_NAME)
 except SQLAlchemyError as e:
-    logger.error(f'[-] Error encountered while connected to {settings.POC_SERVICE_DB_URL}: {e}')
+    logger.error(
+        f"[-] Error encountered while connected to {settings.POC_SERVICE_DB_URL}: {e}"
+    )
     raise e
 
 

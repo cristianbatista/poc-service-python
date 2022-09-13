@@ -1,13 +1,16 @@
-from loguru import logger
-
 from fastapi import FastAPI
+from loguru import logger
 from starlette.middleware.cors import CORSMiddleware
 
+from app.config.sentry import Sentry
 from app.config.settings import settings
-from app.interface.consumers.create_person.consumer import (consumer_cancel_task_stop_consumer,
-                                                            create_consumer_task, initialize_consumer)
 from app.interface.api.v1.endpoints.health import router as health_router
 from app.interface.api.v1.endpoints.person import router as person_router
+from app.interface.consumers.create_person.consumer import (
+    consumer_cancel_task_stop_consumer,
+    create_consumer_task,
+    initialize_consumer,
+)
 
 
 def create_app():
@@ -34,8 +37,11 @@ def create_app():
     )
 
     # define routers
-    app.include_router(health_router, tags=['health'], prefix="/health")
-    app.include_router(person_router, tags=['person'], prefix="/person")
+    app.include_router(health_router, tags=["health"], prefix="/health")
+    app.include_router(person_router, tags=["person"], prefix="/person")
+
+    # Sentry
+    Sentry()
 
     return app
 

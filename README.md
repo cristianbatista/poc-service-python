@@ -1,13 +1,13 @@
 # FastAPI com Kafka Consumer
 
-Este projeto mostra como usar um **Kafka Consumer** e uma _interface_ API Web Python usando
-**FastAPI**. 
+Arquétipo Python -  WebAPI utilizando o framework _FastAPI_ e _aoiokafka_ para publicar e consumir mensagens (Pub/Sub) 
 
 ## Stack
 
-- `python>=3.9` usando `fastapi` como framework web.
-- `aiokafka` biblioteca para interagir com **Kafka**.
-- `alembic` ferramenta para mudanças no banco de dados (_migration_ e _seed_).
+- `python>=3.9` 
+- `fastapi` framework web.
+- `aiokafka` biblioteca para interagir com **Kafka** (async).
+- `alembic` ferramenta para gerenciar estruturas de banco de dados (_migration_ e _seed_).
 
 ## Pré requisitos para ambiente de desenvolvimento
 - [python 3.9+](https://www.python.org/downloads/release/python-3914/) 
@@ -19,8 +19,12 @@ Este projeto mostra como usar um **Kafka Consumer** e uma _interface_ API Web Py
 ```bash
 $ make install
 ```
+Database | gerar _migrations_:
+```bash
+$ alembic revision --autogenerate -m "create table person"
+```
 
-Preparando o banco de dados, executando os _migrations_ e _seeds_:
+Database | executar _migrations_:
 ```bash
 $ alembic upgrade head
 ```
@@ -36,7 +40,27 @@ API Docs:
 http://localhost:8000/docs
 ```
 
+Lint
+```bash
+$ make lint
+```
+
+Format
+```bash
+$ make format
+```
+
 Tests:
 ```bash
 $ make tests
 ``` 
+
+### TO DO
+- [ ] tests all layers
+- [ ] integration test
+- [ ] make coverage
+- [ ] containers dockers
+- [ ] pagination GET API
+- [ ] handle erros API
+- [ ] auth key cloack
+- [ ] CI/CD (migration)

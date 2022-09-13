@@ -1,10 +1,10 @@
+from loguru import logger
+
 from app.application.repository.person_repository import PersonRepository
 from app.exception.person_not_found_exception import PersonNotFoundException
-from loguru import logger
 
 
 class GetPerson:
-
     def __init__(self, repository: PersonRepository):
         self.repository = repository
 
@@ -16,6 +16,3 @@ class GetPerson:
             raise PersonNotFoundException()
 
         return person
-
-
-

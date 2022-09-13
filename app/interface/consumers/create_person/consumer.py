@@ -1,23 +1,24 @@
 import asyncio
-
-# TODO: verificar o loguru pois omitiu os logs do kafka
-# from loguru import logger
-
 import logging
 
 import aiokafka
 
 from app.config.settings import settings
-
-
 # global variables
-from app.interface.consumers.create_person.create_person_worker import CreatePersonWorker
+from app.interface.consumers.create_person.create_person_worker import (
+    CreatePersonWorker,
+)
+
+# TODO: verificar o loguru pois omitiu os logs do kafka
+# from loguru import logger
+
 
 consumer_task = None
 consumer = None
 
-logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+logging.basicConfig(
+    format="%(asctime)s - %(levelname)s - %(message)s", level=logging.INFO
+)
 logger = logging.getLogger(__name__)
 
 

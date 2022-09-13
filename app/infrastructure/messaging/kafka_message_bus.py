@@ -1,12 +1,13 @@
 import json
 
-from app.config.settings import settings
 from aiokafka import AIOKafkaProducer
 from loguru import logger
 
+from app.application.messaging.message_bus import MessageBus
+from app.config.settings import settings
 
-class KafkaMessageBus:
 
+class KafkaMessageBus(MessageBus):
     @staticmethod
     async def send_message(topic: str, message: dict):
         logger.info("Start send message")
@@ -17,7 +18,7 @@ class KafkaMessageBus:
         try:
             # produce message
             logger.info(f"Send and wait message - {message}")
-            await producer.send_and_wait(topic, json.dumps(message).encode('utf-8'))
+            await producer.send_and_wait(topic, json.dumps(message).encode("utf-8"))
         except Exception as e:
             logger.error(f"Error - Send and wait message - {str(e)}")
             raise e

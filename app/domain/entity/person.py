@@ -1,6 +1,8 @@
 from typing import Optional
 
-from app.exception.person_state_unauthorized_exception import PersonStateUnauthorizedException
+from app.exception.person_state_unauthorized_exception import (
+    PersonStateUnauthorizedException,
+)
 from app.shared.models import EntityModel
 
 

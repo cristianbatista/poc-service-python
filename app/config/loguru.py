@@ -23,4 +23,4 @@ def set_logger_configs() -> None:
         logger.level("RESPONSE", no=15, color="<green><bold>")
         logger.level("LATENCY", no=15, color="<blue><bold>")
     except TypeError as e:
-        logger.warning(f'Level already exists: {e}')
+        logger.warning(f"Level already exists: {e}")
