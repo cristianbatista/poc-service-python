@@ -35,6 +35,9 @@ class Settings(BaseSettings):
     POSTGRE_DATABASE_URL: str = f"postgresql://{POSTGRE_DATABASE_USER}:{POSTGRE_DATABASE_PASSWORD}@{POSTGRE_DATABASE_HOST}:{POSTGRE_DATABASE_PORT}/{POSTGRE_DATABASE_NAME}"
 
     # Sentry
-    SENTRY_URL_INGEST_DATA: str = "https://05e1960517334d9d899e556a1859a8bd@o302946.ingest.sentry.io/6663472"
+    SENTRY_URL_INGEST_DATA: str = (
+        "https://05e1960517334d9d899e556a1859a8bd@o302946.ingest.sentry.io/6663472"
+    )
+
 
 settings = Settings()

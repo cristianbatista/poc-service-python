@@ -1,9 +1,11 @@
+import uvicorn
 from fastapi import FastAPI
 from loguru import logger
 from starlette.middleware.cors import CORSMiddleware
 
 from app.config.sentry import Sentry
 from app.config.settings import settings
+from app.interface.api.error_handling import init_error_handling
 from app.interface.api.v1.endpoints.health import router as health_router
 from app.interface.api.v1.endpoints.person import router as person_router
 from app.interface.consumers.create_person.consumer import (
@@ -19,6 +21,7 @@ def create_app():
     @app.on_event("startup")
     async def startup_event():
         logger.info("Initializing API ...")
+        init_error_handling(app)
         await initialize_consumer()
         await create_consumer_task()
 
@@ -47,3 +50,6 @@ def create_app():
 
 
 app = create_app()
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=5001)

@@ -8,9 +8,9 @@ class GetPerson:
     def __init__(self, repository: PersonRepository):
         self.repository = repository
 
-    def execute(self, id: int):
+    async def execute(self, id: int):
         logger.info("Use case - get person")
-        person = self.repository.get(id)
+        person = await self.repository.get(id)
 
         if person is None:
             raise PersonNotFoundException()

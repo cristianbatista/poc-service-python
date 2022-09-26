@@ -1,4 +1,4 @@
-from app.exception.root_exception import RootException
+from app.shared.root_exception import RootException
 
 
 class PersonNotFoundException(RootException):

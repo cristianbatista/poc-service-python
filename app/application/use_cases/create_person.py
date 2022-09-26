@@ -2,9 +2,11 @@ from loguru import logger
 
 from app.application.messaging.message_bus import MessageBus
 from app.application.repository.person_repository import PersonRepository
+from app.application.use_cases.schemas.create_person_input_dto import (
+    CreatePersonInputDto,
+)
 from app.config.settings import settings
 from app.domain.entity.person import Person
-from app.dto.create_person_input_dto import CreatePersonInputDto
 
 
 class CreatePerson:

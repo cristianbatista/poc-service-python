@@ -1,8 +1,8 @@
 
 import pytest
 from app.application.use_cases.create_person import CreatePerson
+from app.application.use_cases.schemas.create_person_input_dto import CreatePersonInputDto
 from app.domain.entity.person import Person
-from app.dto.create_person_input_dto import CreatePersonInputDto
 from app.exception.person_state_unauthorized_exception import PersonStateUnauthorizedException
 
 

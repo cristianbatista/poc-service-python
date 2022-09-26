@@ -1,3 +1,5 @@
+from typing import List
+
 from loguru import logger
 
 from app.application.repository.person_repository import PersonRepository
@@ -7,10 +9,10 @@ from app.infrastructure.models import PersonModel
 
 
 class PostgrePersonRepository(PersonRepository):
-    def __init__(self, session_local_db=None):
+    def __init__(self, session_local_db: SessionLocal = None):
         self.session_db = SessionLocal() if not session_local_db else session_local_db
 
-    async def get(self, person_id):
+    async def get(self, person_id) -> Person:
         logger.info("Get person - repository")
         person = (
             self.session_db.query(PersonModel)
@@ -20,7 +22,20 @@ class PostgrePersonRepository(PersonRepository):
 
         return self._row_to_entity(person)
 
-    async def save(self, person: Person):
+    async def list(self) -> List[Person]:
+        logger.info("List person - repository")
+        records = (
+            self.session_db.query(PersonModel)
+            .order_by(PersonModel.id)
+            .limit(10)
+            .offset(0)
+            .all()
+        )
+
+        x = [self._row_to_entity(item) for item in records]
+        return x
+
+    async def save(self, person: Person) -> Person:
         logger.info("Save person - repository")
         person_model = PersonModel(**person.dict())
         self.session_db.add(person_model)
